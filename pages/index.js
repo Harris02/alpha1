@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { RegisterForm } from './register'
+import  RegisterForm  from './register'
 
 
 export default function Home() {
