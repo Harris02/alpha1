@@ -7,7 +7,7 @@ export default function LoginPage(){
     
     async function handleLogin(event){
       event.preventDefault();
-      await fetch('https://virtserver.swaggerhub.com/Alpha1_Inbound/JourneyBook/1.0.0/authentications', {
+      const login = await fetch('api.rulim34.dev/authentications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -15,11 +15,12 @@ export default function LoginPage(){
           password,
   })
 })
-try{ 
-  window.location.replace('./book');
+try{
+
+  console.log(await login)
 }
 catch(error){
-alert(data.errors);
+  console.log(error);
 }
     }
     return(
