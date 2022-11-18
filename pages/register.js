@@ -2,7 +2,7 @@ import React from "react";
 import { Router } from "next/router";
 import { useState } from "react";
 
-export function RegisterForm() {
+export default function RegisterForm() {
   const [fullname, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
