@@ -10,7 +10,7 @@ export default function RegisterForm() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const regData = await fetch('http://api.rulim34.dev/api/v3/users', {
+    const regData = await fetch('https://api.rulim34.dev/api/v3/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
