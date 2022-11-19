@@ -1,17 +1,10 @@
 import Head from 'next/head'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css'
 import  RegisterForm  from './register'
 
 
 export default function Home() {
-  const api='https://virtserver.swaggerhub.com/Alpha1_Inbound/JourneyBook/1.0.0/';
-  async function getRoot(){
-    fetch(api, {method: 'GET'});
-  }
-  useEffect(()=>{
-    getRoot()
-  },[]);
   async function signout(){
     fetch('https://virtserver.swaggerhub.com/Alpha1_Inbound/JourneyBook/1.0.0/authentications',{
       method: 'DELETE',

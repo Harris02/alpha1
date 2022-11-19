@@ -21,10 +21,11 @@ export default function RegisterForm() {
       })
     })
    try{
-      console.log(regData);
+      const alpha = await regData.json()
+      console.log(alpha);
      }
    catch(error){
-    console.error(error);
+    alert("Error occured");
   }
   }
 

@@ -7,7 +7,7 @@ export default function LoginPage(){
     
     async function handleLogin(event){
       event.preventDefault();
-      const login = await fetch('api.rulim34.dev/authentications', {
+      const login = await fetch('https://api.rulim34.dev/api/v3/authentications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -16,8 +16,8 @@ export default function LoginPage(){
   })
 })
 try{
-
-  console.log(await login)
+  const beta = await login.json()
+  console.log(beta)
 }
 catch(error){
   console.log(error);

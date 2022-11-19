@@ -10,7 +10,7 @@ export default function JourneyBook(){
     
     async function addNotes(e){
         e.preventDefault();
-        const add= await fetch (`https://virtserver.swaggerhub.com/Alpha1_Inbound/JourneyBook/1.0.0/books/${bookID}`,{
+        const add= await fetch (`https://api.rulim34.dev/books/${bookID}`,{
             method:'POST',
             header:{'Content-Type':'aplication/json'},
             body: JSON.stringify({

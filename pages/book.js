@@ -12,7 +12,7 @@ export default function Book(){
      
     //Nampilin buku yang pernah dibuat
     async function getBook(){    
-    const idBook = await fetch('https://virtserver.swaggerhub.com/Alpha1_Inbound/JourneyBook/1.0.0/books',{method:'GET'});
+    const idBook = await fetch('https://api.rulim34.dev/books',{method:'GET'});
     try{
         const bookID = await idBook.json();
         const booksTitle = bookID.data.books;
@@ -28,7 +28,7 @@ export default function Book(){
     async function addBook(e){
         e.preventDefault();
         setBook([title,...bookArray]);
-        const add= await fetch ('https://virtserver.swaggerhub.com/Alpha1_Inbound/JourneyBook/1.0.0/books',{
+        const add= await fetch ('https://api.rulim34.dev/books',{
             method:'POST',
             header:{'Content-Type':'aplication/json'},
             body: JSON.stringify({
