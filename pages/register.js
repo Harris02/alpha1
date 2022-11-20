@@ -12,6 +12,7 @@ export default function RegisterForm() {
     event.preventDefault();
     const regData = await fetch('https://api.rulim34.dev/api/v3/users', {
       method: 'POST',
+      mode:'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         fullname,
@@ -23,9 +24,11 @@ export default function RegisterForm() {
    try{
       const alpha = await regData.json()
       console.log(alpha);
+      alert(alpha.message);
+      window.location.replace('./login')
      }
    catch(error){
-    alert("Error occured");
+    console.log(error);
   }
   }
 

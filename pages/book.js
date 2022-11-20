@@ -11,8 +11,8 @@ export default function Book(){
     const [prevBooks, setPrevBook]=useState([])
      
     //Nampilin buku yang pernah dibuat
-    async function getBook(){    
-    const idBook = await fetch('https://api.rulim34.dev/books',{method:'GET'});
+   /* async function getBook(){    
+    const idBook = await fetch('https://api.rulim34.dev/api/v3/books',{method:'GET'});
     try{
         const bookID = await idBook.json();
         const booksTitle = bookID.data.books;
@@ -22,13 +22,13 @@ export default function Book(){
         console.log(errors)
     }      
     }
-    useEffect(()=>{getBook()},[]);
+    useEffect(()=>{getBook()},[]); */
 
     //Nambah Buku
     async function addBook(e){
         e.preventDefault();
         setBook([title,...bookArray]);
-        const add= await fetch ('https://api.rulim34.dev/books',{
+        const add= await fetch ('https://api.rulim34.dev/api/v3/books',{
             method:'POST',
             header:{'Content-Type':'aplication/json'},
             body: JSON.stringify({
@@ -60,17 +60,8 @@ export default function Book(){
                <Link href={`./book/${titleBook.toLowerCase().replace(/ /g, '-')}`}> <li key={index}>{titleBook}</li></Link>
             )})}
 
-            
-            {
-            //Syntaxnya gini kah???
-            prevBooks.map((previous,index)=>{
-                return(
-                    <Link href={`./book/${previous}`}><li key={index}>{previous}</li></Link>
-                )
-            })}
-
             </ul>
-            <Link href="./map">Map</Link>
+            <Link href="./exampleMap">Map</Link>
             </div>
         </main>
     )

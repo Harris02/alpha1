@@ -1,3 +1,4 @@
+import { redirect } from "next/dist/server/api-utils";
 import Head from "next/head";
 import { useState } from "react";
 
@@ -17,7 +18,9 @@ export default function LoginPage(){
 })
 try{
   const beta = await login.json()
-  console.log(beta)
+  console.log(beta);
+  alert(beta.message);
+  window.location.replace("./book")
 }
 catch(error){
   console.log(error);

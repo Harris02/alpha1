@@ -127,3 +127,7 @@
     filter: invert(1);
   }
 }
+.maps{
+  height: 100px;
+  width: 100px;
+}
