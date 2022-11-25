@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import {hasCookie,deleteCookie} from 'cookies-next';
-
+ 
 export default function Navbar(){
     const router = useRouter();
     const [isLoggedin,setLogin]=useState(null)
