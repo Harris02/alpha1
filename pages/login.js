@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import swal from 'sweetalert';
 import Navbar from "../components/navbar";
+import { useEffect } from "react";
 import { setCookie,deleteCookie } from "cookies-next";
 import { useRouter } from "next/router";
 
