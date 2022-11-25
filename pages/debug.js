@@ -23,7 +23,7 @@ export default function LoginPage(){
   })
 }).catch((error) =>{
     console.log(error);
-    swal({title:'Failed',text:'You put a wrong data',icon:'error'});
+    swal({title:'Failed',text:'You put a wrong data',icon:'failed'});
   })
 try{
   deleteCookie('token');
