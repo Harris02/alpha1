@@ -27,11 +27,9 @@ export default function LoginPage(){
     swal({title:'Failed',text:'You put a wrong data',icon:'error'});
   })
 try{
-  deleteCookie('token');
   const beta = await login.json();
   const token = beta.data;
-  console.log(token);
-  setCookie('token',JSON.stringify(token.accessToken));
+  setCookie('token',JSON.stringify(token.accessToken),{maxAge:60*5});
   swal({title:'Congratulations',text:beta.message,icon:'success'});
   setTimeout(redirect,3000)
 }

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import {hasCookie, getCookie} from 'cookies-next';
+import {hasCookie, getCookie,setCookie} from 'cookies-next';
 import { useRouter } from "next/router";
 import axios from "axios";
 import Navbar from "../components/navbar";
@@ -17,8 +17,6 @@ export default function Book(){
     const isAuthenticated=hasCookie('token')
     const router = useRouter();
     const token = getCookie('token');
-
-    console.log(`Bearer ${token}`)
 
     useEffect(()=>{
         if(!isAuthenticated==true){
@@ -52,12 +50,11 @@ export default function Book(){
         const add= axios.post('https://api.rulim34.dev/api/v3/books',{
             header:{
                 'Content-Type':'application/json',
-                'Authorization':`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYyNTQzNmZiLWIyMGUtNDNkOS05MzI4LTI4YTE1ZTFhZGYyYiIsInVzZXJuYW1lIjoiaWRyaXMiLCJpYXQiOjE2NjkzNTAxODEsImV4cCI6MTY2OTM1Mzc4MX0.DCdB5CyifZhRffpl7G-9MOdn1WiIGufPcrzYun1dGLo`
-        },
+                'Authorization':`Bearer ${token}`},
             body: JSON.stringify({
                 title
             })
-        });
+        }).catch(err=>{swal("Successful","Added book successfully","success")})
         try{
             const addedBook= add;
             console.log(addedBook);
@@ -78,16 +75,18 @@ const handleClick = () => {
             <header className="text-center text-5xl font-bold pt-5">Book Page</header>
             <Navbar/>
             <div style={{display: visibility ? 'block' : 'none'}}>
-            <label>Judul Buku</label>
-            <input className="rounded-md w-[30%]" type="text" id='judul' placeholder='Judul Buku' onChange={(e)=>setTitle(e.target.value)}></input>
-            <button className="rounded-full bg-purple-700 text-white" id="add" onClick={addBook}>Add</button>
+            <div className="flex flex-col fixed top-[5%] left-[40%] items-center justify-center z-10 h-full">
+            <label className="text-white text-xl">Judul Buku</label>
+            <input className="rounded-md p-20" type="text" id='judul' placeholder='Judul Buku' onChange={(e)=>setTitle(e.target.value)}></input>
+            <button className="p-2 rounded-md bg-purple-700 text-white" id="add" onClick={addBook}>Add</button>
+            </div>
             </div>
 
             <button className="rounded-full bg-purple-700 text-white w-20 h-20 fixed right-10 bottom-10" id="add" onClick={handleClick}>Add</button>
-            <div className=" p-5 grid grid-cols-4 gap-5">
+            <div style={{display:visibility?'none':'grid'}} className="ml-5 p-5 grid grid-cols-4 gap-5">
             {bookArray.map((titleBook,index)=>{
             return (
-               <Link href={{pathname:`./book/${titleBook.toLowerCase().replace(/ /g, '-')}`}}> <div className="bg-purple-700 text-white p-10" key={index}>{titleBook}</div></Link>
+               <Link as={`/book/${titleBook}`} href='/book/[books]'> <div className="bg-transparent rounded-lg border-2 border-purple-700 hover:backdrop-blur-sm hover:scale-105 text-white p-10" key={index}>{titleBook}</div></Link>
             )})}
             </div>
         </main>

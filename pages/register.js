@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useDebugValue, useEffect } from "react";
 import swal from 'sweetalert';
 import { useState } from "react";
 import axios from "axios";
@@ -10,6 +10,7 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [confirm,setConfirm]=useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -32,20 +33,11 @@ export default function RegisterForm() {
   }
 }
  function handleInvalid(e){
-      if(e.target.value==username){
-        e.target.setCustomValidity("Can't have any spaces, any symbols, or any capitalized alphabet")}
-      else if(e.target.value==fullname){
-        e.target.setCustomValidity("Can't have any symbols or numbers")}
-      else if(e.target.value==password){
-        e.target.setCustomValidity("Minimum 8 chars with one letter and one number");
+      if(confirm!==password){
+        e.target.setCustomValidity('Your password is wrong')
       }
-    
   }
-  function validation(e){
-    if(e.target.value!=password){
-      e.target.setCustomValidity("Your password is wrong")
-    }
-  }
+  useEffect(()=>{handleInvalid()},[])
   function handleChange(e){
     e.target.setCustomValidity("")
   }
@@ -65,11 +57,10 @@ export default function RegisterForm() {
         </div>
       </div>
       </div>
-          <input required pattern="^[a-zA-Z ]+$" onInvalid={handleInvalid} onInput={handleChange} className='text-white rounded-full h-12 w-1/2 my-5 bg-slate-900 text-center' type="text" id="fullName"  placeholder="Full Name" onChange={(event) => setFullName(event.target.value)}/>
+          <input required pattern="^[a-zA-Z ]+$" onInvalid={(e)=>e.target.setCustomValidity("Cant have any symbols or numbers")} onInput={handleChange} className='text-white rounded-full h-12 w-1/2 my-5 bg-slate-900 text-center' type="text" id="fullName"  placeholder="Full Name" onChange={(event) => setFullName(event.target.value)}/>
           <input required className='rounded-full h-12 w-1/2 my-5 text-white bg-slate-900 text-center' type="email" id="emailInput"  placeholder="Email" onChange={(event) => setEmail(event.target.value)}/>
-          <input required pattern="[a-z0-9]+" onInvalid={handleInvalid} onInput={handleChange}  className='text-white rounded-full h-12 w-1/2 my-5 bg-slate-900 text-center' type="text" id="username"   placeholder="Username" onChange={(event) => setUsername(event.target.value)}/>
-          <input required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" onInvalid={handleInvalid} onInput={handleChange} className='rounded-full h-12 w-1/2 my-5 bg-slate-900 text-white text-center' type="password" id="passwordInput" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
-          <input required className='rounded-full h-12 w-1/2 my-5 bg-slate-900 text-white text-center' type="password" id="confirmPasswordInput" placeholder="Confirm Password" onChange={validation}/>
+          <input required pattern="[a-z0-9]+" onInvalid={(e)=>e.target.setCustomValidity("Cant have any spaces, any symbols, or any capitalized alphabet")} onInput={handleChange}  className='text-white rounded-full h-12 w-1/2 my-5 bg-slate-900 text-center' type="text" id="username"   placeholder="Username" onChange={(event) => setUsername(event.target.value)}/>
+          <input required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" onInvalid={(e)=>e.target.setCustomValidity("Minimum 8 chars with one letter and one number")} onInput={handleChange} className='rounded-full h-12 w-1/2 my-5 bg-slate-900 text-white text-center' type="password" id="passwordInput" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
           <button type="submit" className='mb-10 text-white bg-purple-600 p-5 rounded-lg w-1/4'>Sign Up</button>
 
       </fieldset>
